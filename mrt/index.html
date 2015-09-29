@@ -1,0 +1,175 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>HVDR Mutation Reporter Tool</title>
+<link rel="stylesheet" type="text/css" href="/res/hvdr.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<style type="text/css">
+.hidden { visibility: hidden; }
+.unhidden { visibility: visible; }
+td { text-align : left; }
+td.shade1 { background: lightblue; }
+td.shade2 { background: #ffff99;w; }
+td.shade3 { background: pink; }
+fieldset { width: 55%; }
+input.aminoacid1 { text-align:center; background:lightblue; color:darkslategrey; font-weight:bold; }
+input.aminoacid2 { text-align:center; background:#ffff99; color:darkslategrey; font-weight:bold; }
+input.nucleotide { text-align:center; }
+div.instructions { font-family:monospace; }
+a:focus { outline: 0; }
+em.i { font-style:oblique; font-weight:normal; text-decoration:none; }
+em.b { font-style:normal; font-weight:bold; text-decoration:none; }
+legend { font-weight:bold; padding:0.2em 0.5em; border:1px solid green; color:green; font-size:120%; font-family:monospace; background:lightgreen; }
+<!-- http://www.pixy.cz/blogg/clanky/css-fieldsetandlabels.html -->
+</style>
+
+<script language="JavaScript">
+function RegExpHelp()
+{
+    alert("Ensure sequence data is *really* in FASTA format.");
+}
+
+function showHide(divID)
+{
+	for (i=0; i<4; i++)
+	{
+		var item = document.getElementById(divID + i);
+		if (item)
+		{
+			item.className=(item.className=='hidden')?'unhidden':'hidden';
+		}
+	}
+}
+</script>
+</head>
+<body>
+<h1>HVDR Online Tools</h1>
+<div class="note">Hepatitis Virus Diversity Research Programme, University of the Witwatersrand</div>
+<h2><img src="/res/mrt.png" style="vertical-align:middle"> Mutation Reporter Tool <img src="/res/mrt.png" style="vertical-align:middle"></h2>
+
+<!--
+<p class="explain">
+<b>Aligned</b> sequences in FASTA format are required. Loci must be in the format "1762,1764,1809-1812" and may not contain spaces. Sequences data to the left of the anchor motif will be cropped.
+</p><br>
+-->
+
+<form method="post" action="/cgi-bin/mrt.cgi" enctype="multipart/form-data">
+
+<br>
+<fieldset style="background:#D7F9D7;">
+<legend>Introduction and Resources</legend>
+
+<b>What is this tool?</b> This online tool extracts and summarises nucleotide or amino acid sequence data at specified loci of interest. It is primarily aimed at researchers who want summarized distribution data of residue variation at known loci of interest.
+<br><br>
+<b>What input is required?</b> An input FASTA file containing aligned nucleotide or amino acid sequence data is required. Additional required input parameters are an anchor motif and position, and the loci of interest.
+<br><br>
+<b>What output is generated?</b> The tool produces several tables of data, which summarize residue distribution at the specified loci. Additional tables and graphs are output according to the specified input parameters described elsewhere.
+<br><br>
+
+<b>The following resources are available:</b>
+<ul>
+<li>Published paper (full PDF available online <a href="http://www.virologyj.com/content/10/1/62/" target="_blank">here</a>) <img src="/res/open-access.gif" style="vertical-align:middle"></li>
+<li><a href="tutorial.html" target="_blank">Online Tutorial</a></li>
+<li><a href="faq.html" target="_blank">Frequently Asked Questions</a> (FAQ)</li>
+</ul>
+</fieldset>
+
+<br>
+<fieldset>
+<legend>Specify Input Parameters</legend>
+
+	<table cellpadding="3">
+	<tr><td>Aligned FASTA file</td><td><input type="file" name="infile" size="32"></td></tr>
+	<tr>
+	<td>Sequence data type</td>
+	<td><input type="radio" name="sequencetype" value="nt" checked onChange="javascript:showHide('ntonly')">Nucleotides<input type="radio" name="sequencetype" value="aa" onChange="javascript:showHide('ntonly')">Amino Acids</td>
+	</tr>
+	<tr><td>Anchor motif</td><td><input type="text" name="anchormotif" size="16"></td</tr>
+	<tr><td>Anchor position</td><td><input type="text" name="anchorposition" size="8"></td</tr>
+	<tr><td>Loci</td><td><input type="text" name="loci" size="48"></td></tr>
+	<tr><td><div id="grouping1" class="unhidden">Output grouping</div></td><td><div id="grouping2" class="unhidden"><input type="text" name="outputgrouping" size="32"></div></td></tr>
+
+	<tr><td>
+		<select name="filter">
+			<option value="include">Include</option>
+			<option value="exclude">Exclude</option>
+		</select>
+		sequence ID pattern</td>
+		<td><input type="text" name="pattern" size="32">
+		<input type="button" name="alert" value="RegExp Tutorial" onClick="window.open('regexp.html', '_blank')">
+</td></tr>
+</table>
+</fieldset>
+
+<br>
+<fieldset>
+<legend>Specify Output Parameters</legend>
+<table cellpadding="3">
+
+	<tr><td>FASTA ID truncation length</td><td><input type="text" name="truncation" size="3" value="20" maxlength="3"></td></tr>
+	<tr><td>Sort sequences by ID</td><td><input type="checkbox" name="sortsequences"></td></tr>
+	<tr><td>Output percentages instead of counts</td><td><input type="checkbox" name="percentages" checked></td></tr>
+	<tr><td>Suppress zeros in ouput</td><td><input type="checkbox" name="suppresszeros" checked></td></tr>
+<!--
+	<tr><td><div id="ntonly2" class="unhidden"><input type="checkbox" name="aminoacidcoloroutput" checked></div></td><td><div id="ntonly1" class="unhidden">Amino acid color output</div></td></tr>
+-->
+
+<!--
+	<tr><td><strike>Reference sequence</strike></td><td><input type="text" name="referencesequence" size="48" disabled></td</tr>
+-->
+
+<!--
+	<tr><td>Your email address</td><td><input type="text" name="emailaddress" size=48></td></tr>
+-->
+
+</table>
+</fieldset>
+
+<br>
+<fieldset class="unhidden" id="grouping3">
+<legend>Specify Mutation Distribution Graph Parameters</legend>
+<table cellpadding="3">
+	<tr><td><input type="button" name="alert" value="Graph Tutorial" onClick="window.open('graphtut.html', '_blank')"></td><td></td></tr>
+	<tr><td><div>Reference Motif</div></td><td><div><input type="text" name="referencemotif" size="16" title="Leave empty to disable graph output"></td></tr>
+	<tr><td><div>Graph Title</div></td><td><div><input type="text" name="graphtitle" size="48" value="Mutation Distribution" maxlength="48"></td></tr>
+	<tr><td><div>Graph Width (pixels)</div></td><td><div><input type="text" name="graphwidth" size="4" value="960" maxlength="4"></td></tr>
+	<tr><td><div>Graph Height (pixels)</div></td><td><div><input type="text" name="graphheight" size="4" value="480" maxlength="4"></td></tr>
+	<tr><td><div>Stacked Bars</div></td><td><div><input type="checkbox" name="stacked" checked></td></tr>
+	<tr><td><div>Suppress Conserved Loci</div></td><td><div><input type="checkbox" name="suppressconserved" checked></td></tr>
+	<tr><td><div>Y-Axis Scaled to 100%</div></td><td><div><input type="checkbox" name="graphscale" unchecked></td></tr>
+</table>
+</fieldset>
+
+<br>
+<fieldset>
+<legend>Additional options</legend>
+	<tr><td><input type="checkbox" name="discoverymode" onChange="javascript:showHide('grouping')" title="Ignore conserved loci. Disables output grouping and graph."></td><td>Enable Discovery Mode</td></tr>
+</fieldset>
+
+<br>
+<input type="submit" name="submit;" style="font-size:32px"; value="Submit!"/></form>
+
+<!--#include virtual="/hvdrp/footer.html" -->
+
+<br>
+<fieldset style="background:#ffffbb;">
+<legend>Citation</legend>
+<tt><b>Bell, T. G. and Kramvis, A.</b> (2013) <i>Mutation Reporter Tool: an online tool to interrogate loci of interest, with its utility demonstrated using hepatitis B virus</i>. Virology Journal <b>10:</b> 62. <br><br><img src="/res/open-access.gif" style="vertical-align:middle"> Available <a href="http://www.virologyj.com/content/10/1/62" target="_blank">online</a>.</tt>
+</fieldset>
+
+<br>
+<div class="dotted_red">
+<p class="compact">
+&bull; ALL TOOLS ARE PROVIDED WITHOUT ANY WARRANTY &bull; CHECK ALL RESULTS CAREFULLY &bull;
+</p>
+<p class="compact">
+Queries or comments to Professor Anna Kramvis [Anna.Kramvis (@) wits.ac.za]
+</p>
+</div>
+<br>
+
+</body>
+</html>
+

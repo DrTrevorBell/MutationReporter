@@ -1,0 +1,69 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>HVDRP Mutation Reporter Tool: Graph Tutorial</title>
+<link rel="stylesheet" type="text/css" href="/res/hvdr.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<style type="text/css">
+.hidden { visibility: hidden; }
+.unhidden { visibility: visible; }
+td { text-align : left; }
+td.shade1 { background: lightblue; text-align: center; font-weight: bold; }
+td.shade2 { background: #AAFFAA; }
+td.shade3 { background: pink; }
+fieldset { width: 95%; }
+input.aminoacid1 { text-align:center; background:lightblue; color:darkslategrey; font-weight:bold; }
+input.aminoacid2 { text-align:center; background:#ffff99; color:darkslategrey; font-weight:bold; }
+input.nucleotide { text-align:center; }
+div.instructions { font-family:monospace; }
+span.compare { color:blue; }
+span.tt { color:black; background:#DDFFDD; font-family:monospace; }
+ul.samplelist { font-family:monospace; color:blue; }
+.sample { font-family: monospace; color:blue; }
+.mono { font-family: monospace; font-weight: bold; }
+a:focus { outline: 0; }
+em.i { font-style:oblique; font-weight:normal; text-decoration:none; }
+em.b { font-style:normal; font-weight:bold; text-decoration:none; }
+legend { font-weight:bold; padding:0.2em 0.5em; border:1px solid green; color:green; font-size:120%; font-family:monospace; background:lightgreen; }
+</style>
+</head>
+<body>
+<h1>HVDR Online Tools</h1>
+<div class="note">Hepatitis Virus Diversity Research <a href="http://www.wits.ac.za/health/hvdrp">Programme</a> and Wits <a href="http://www.bioinf.wits.ac.za">Bioinformatics</a><br>University of the Witwatersrand</div>
+<h2><img src="/res/mrt.png" style="vertical-align:middle"> Mutation Reporter Tool</h2>
+
+<br>
+<fieldset>
+<legend>Graph Tutorial</legend>
+
+The tool will produce a mutation distribution graph only if a reference motif is specified on the input page. Graph output is disabled when Discovery Mode is selected. The graph plots the variation shown in the Residue Distribution Summary table. That is, loci are plotted on the X-axis and percentage frequency for residues at each locus are plotted on the Y-axis. Various options on the input page (see below for more details) allow for the graph output to be modified. The raw data used to create the graph is available for download as a CSV (comma-separated values) file by clicking the link below the table. A CSV file can easily be imported into a spreadsheet or statistical program.
+<br><br>
+
+<table cellpadding="3">
+<tr><td class="shade1">Reference Motif</td><td class="shade2">If a reference motif is specified, the tool will produce a graph. The reference motif is a string of the wild-type (reference) residues expected at each locus, in order. As such, a reference residue must be specified for each locus. The tool excludes (masks) the reference residue from the graph. This results in the graph showing the distribution of mutations (non-reference or non-wild-type residues) for each locus. It is not required that the reference be the wild-type however. Any motif can be entered as a reference, allowing for greater customization of the graph. As an example, if the input data is curated nucleotide sequence data which does not contain the residue "N", then specifying a reference of <span class="tt">&nbsp;N&nbsp;</span> for each locus will result in the tool plotting <i>all</i> residues for each locus, as none of the residues A, C, G or T will match the reference residue of "N" and will therefore be considered a mutation. The same result can be achieved for amino acid sequence data by specifying a reference of <span class="tt">&nbsp;-&nbsp;</span> or <span class="tt">&nbsp;?&nbsp;</span> for each locus, with the proviso that the chosen character should not be present in the input sequence data.</td></tr>
+<tr><td class="shade1">Graph Title</td><td class="shade2">Text entered here will appear at the top of the graph.</td></tr>
+<tr><td class="shade1">Graph Width</td><td class="shade2">The width of the graph in pixels. Text on the graph scales with graph width. However, the text may be too large on very wide graphs showing a large number of loci. Likewise, the text may be too small on very narrow graphs. In these situations, it is recommended that the raw graph data be downloaded to plot with a program locally.</td></tr>
+<tr><td class="shade1">Graph Height</td><td class="shade2">The height of the graph in pixels.</td></tr>
+<tr><td class="shade1">Stacked Bars</td><td class="shade2">When this control is selected, the second and subsequent residues at a locus will be plotted vertically, producing a stacked bar. When this is unselected, multiple residues at a locus are plotted next to each other. <span class="compare">If graphs from several different data-sets are to be compared downstream, it is recommended that this control be <i>selected</i>, so that the graphs produced are more easily compared, as the width of each locus will then be constant.</span></td></tr>
+<tr><td class="shade1">Suppress Conserved Loci</td><td class="shade2">When this control is selected, loci at which only the reference residue is found will not be included in the graph. When this control is unselected, all specified loci will be plotted. Loci at which only the reference residue is found will be shown on the graph as an "empty" column without data. <span class="compare">If graphs from several different data-sets are to be compared downstream, it is recommended that this control be <i>unselected</i>, so that the graphs produced are more easily compared, as each graph will then contain all specified loci.</span></td></tr>
+<tr><td class="shade1">Y-Axis Scaled to 100%</td><td class="shade2">When this control is not selected, the scale (range) of the Y-axis will be determined by the input data. For example, of the highest percentage frequency in the data is 50%, the Y-axis will scale to show a range between 0% and 50%. When this control is selected, the Y-axis will range from 0% to 100%, regardless of the range of the input data. <span class="compare">If graphs from several different data-sets are to be compared downstream, it is recommended that this control be <i>selected</i>, so that the Y-axis of all the graphs are the same (100%). This avoids visual scaling confusion between the graphs.</span></td></tr>
+
+</table>
+</fieldset>
+<br>
+<fieldset>
+<legend>Example</legend>
+The following graph was produced with the following relevant default settings: <span class="tt">Suppress Conserved Loci</span> selected and <span class="tt">Y-Axis Scaled to 100%</span> not selected. The input file contained amino acid sequence data. Four loci and a reference motif were specified.
+<br>
+<img src="graph1.png">
+<br><br>
+After unselecting <span class="tt">Suppress Conserved Loci</span> and selecting <span class="tt">Y-Axis Scaled to 100%</span>, the following graph was produced:
+<br>
+<img src="graph2.png">
+</fieldset>
+
+</body>
+</html>
+

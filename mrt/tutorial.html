@@ -1,0 +1,142 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>HVDRP Mutation Reporter Tool Online Tutorial</title>
+<link rel="stylesheet" type="text/css" href="/res/hvdr.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<style type="text/css">
+h3 { background: lightblue; font-style: italic; font-weight: bold; padding:0.5em; }
+h3.toc { background: lightgreen; font-style: italic; font-weight: bold; padding:0.5em; }
+tt.kw { font-weight:bold; background:lightgreen; }
+tt.data { font-weight: bold; }
+img { border: 2px green dashed ; }
+h4 { font-style: italic; }
+</style>
+</head>
+<body style="background:#ffff99;">
+
+<h1>HVDRP Mutation Reporter Tool</h1>
+<h2>Online Tutorial</h2>
+
+<div style="margin:3em;">
+
+<a name="toc"><h3 class="toc">Table of Contents</h3></a>
+<ul>
+<li><a href="#resources">Resources</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#input">Input Parameters</a></li>
+<li><a href="#output">Output Parameters</a></li>
+<li><a href="#results">Output Page</a></li>
+<li><a href="#citation">Citation</a></li>
+</ul>
+
+
+
+<a name="resources"><h3>Resources</h3></a>
+<ul>
+<li>Published paper (full PDF available online <a href="">here</a>)</li>
+<li><a href="faq.html" target="_blank">Frequently Asked Questions</a> (FAQ)</li>
+</ul>
+
+<a href="#toc"><b><tt>[Table of Contents]</tt></b></a>
+
+
+
+<a name="introduction"><h3>Introduction</h3></a>
+<p>This tutorial discusses the "Mutation Reporter Tool", using example data from the hepatitis B virus (HBV). The tool can be used with aligned sequence data (nucleotides or amino acids) from any source, however. The HBV genome, which is circular, is approximately 3200 nucleotides in length and has been well-characterized. Mutations (single nucleotide polymorphisms) in the genetic sequence of HBV are common. Certain patterns of mutations are characteristic of a particular genotype or subgenotype. Patterns at other loci are characteristic of known drug-resistant mutants or indicate other important viral characteristics, such as down-regulation of a viral antigen.</p>
+
+<p>Several mutations of interest are located in the basic core promoter/precore (BCP/PC) region of the viral genome. This region of the genome is located between genomic co-ordinates 1606 and 1941 (depending on genotype/subgenotype). Mutations in this region are known by their genomic co-ordinates. For example, the variable Kozak sequence is located at co-ordinates 1809-1812 of the viral genome. Other loci of interest are found at positions 1762, 1764, 1858, 1862, 1888 ad 1896. Sequence data at other loci in this region are typically well-conserved and not of interest.</p>
+
+<p>The "Mutation Reporter Tool" extracts and summarizes nucleotide or amino acid sequence data at known loci of interest, making it easier to identify patterns and mutations of interest, as data from sites of no interest are not included.</p>
+
+<p>The tool is an online service and requires an input file to be uploaded. Output from the tool is displayed on a web-page. Certain components of the output can be downloaded.</p>
+
+<p>Parameters found on the input web-page of the tool, which can be specified by the user, are indicated below in <tt class="kw">this typeface</tt>.</p>
+
+<a href="#toc"><b><tt>[Table of Contents]</tt></b></a>
+
+
+<a name="input"><h3>Input Parameters</h3></a>
+<p>The tool requires a plain text file in FASTA format as input. This file should contain aligned sequence data (nucleotide or amino acid) for the samples to be processed. The sequence data type (<tt class="kw">Nucleotides</tt> or <tt class="kw">Amino Acids</tt>) should be specified on the input page.</p>
+
+<p>Whilst the tool can process sequence data of virtually any length, typically sequence data from PCR amplicons (fragments) would be used. The BCP/PC region of HBV is sequenced routinely, generating a PCR amplicon of approximately 500 nucleotides. Known loci of interest in this fragment are labeled according to their genomic co-ordinates. For example, the Kozac sequence is found at positions 1809-1812 as described above. However, the Kozac sequence will not be located at these positions within the sequence fragment itself. The <tt class="kw">Anchor motif</tt> and <tt class="kw">Anchor position</tt> parameters allow the tool to orientate the input sequence fragment in the context of the entire genome. The anchor motif should be a conserved region, which occurs before (that is, "to the left of") of the first locus of interest. In BCP/PC sequences, the motif "AGATTA" at genomic co-ordinate 1750 is highly-conserved. The tool searches for the entire anchor motif in the first sequence in the input file. If the motif is not found in the first sequence, the tool reports an error. If the motif is found in the first sequence, the tool considers the first reside of this motif to have the genomic position indicated by the anchor position.</p>
+
+<p>The loci of interest are entered into the <tt class="kw">Loci</tt> field of the input page. Individual loci may be separated by a single comma, with ranges separated by a dash. No other characters or spaces should be entered. For example, the ten loci of interest within the BCP/PC region would be specified as <tt class="data">1762,1764,1809-1812,1858,1862,18881,1896</tt>. The input page of the tool would look as follows:</p>
+<img src="tut03.png">
+
+<p>If no output grouping is specified, when the input page is submitted, the tool will display the residues found at all loci, for each sequence, in a single column in the loci distribution table on the output page as follows:</p>
+<img src="tut01.png">
+
+<p>It may often be convenient to group loci into logical units, with each unit appearing in its own column in the loci distribution table. This is achieved by entering values in to the <tt class="kw">Output grouping</tt> field on the input page. This field requires a list of numbers, separated by commas. No other characters or spaces should be entered. The numbers represent the number of loci to be grouped. In the example, <tt class="data">1762</tt> and <tt class="data">1764</tt> are considered as a unit, as are <tt class="data">1809-1812</tt>. The sum of the numbers entered for the output grouping must equal the number of loci specified. That is, each locus must be accounted for in the output grouping. In the example mentioned above, an output grouping of <tt class="data">2,4,1,1,1,1</tt> would place the first two loci into a column, followed by the next four loci in another column, followed by each of the remaining loci each in their own column, as follows:</p>
+<img src="tut02.png">
+
+<p>By default, all sequences in the input file are processed. If only a subset of sequences should be processed, a regular expression can be entered into the <tt class="kw">Include/Exclude sequence ID pattern</tt> field. Full details are provided in the separate regular expression tutorial, which is available <a href="regexp.html" target="_blank">here</a> (this link will open in a new browser window). This feature is dependent on appropriate labeling of the sequences in the input file. For example, if sequences from symptomatic patients are given FASTA IDs in the form <tt class="data">>Patient001SYM</tt> and those of asymptomatic patients the form <tt class="data">>Patient002NON</tt>, then either group may be included or excluded easily by specifing the appropriate regular expression.</p>
+
+<a href="#toc"><b><tt>[Table of Contents]</tt></b></a>
+
+
+
+<a name="output"><h3>Output Parameters</h3></a>
+<p>Several output parameters may be specified, as follows:</p>
+<ul>
+<li>FASTA sequence IDs on the output page are trimmed to the length specified by the <tt class="kw">FASTA ID truncation length</tt> field.</li>
+<li> If the check-box next to <tt class="kw">Sort sequences by ID</tt> is checked, sequences will be sorted alphabetically by the sequence ID.</li>
+<li>Numerical values of residue distributions in the output tables will be shown as percentages if the check-box next to <tt class="kw">Output percentages instead of counts</tt> is checked; otherwise, raw count data will be shown.</li>
+<li>To aid readability, values of zero in output tables can be omitted by checking the check-box next to <tt class="kw">Suppress zeros in ouput</tt>. If table data is copied from the output page and pasted into a spreadsheet, it may be necessary to include the zero values.</li>
+</ul>
+
+<p>Full details of the "Mutation Distribution Graph Parameters" section are provided in the separate graph tutorial <a href="graphtut.html" target="_blank">here</a> (this link will open in a new browser window).</p>
+
+<p>When the tool is used in <tt class="kw">Discovery Mode</tt>, it examines all the loci specified, but only selects for inclusion those loci at which variation occurs. This can be used to discover positions of interest by excluding positions at which no variation occurs. A single variant residue is sufficient for a locus to be included. When the <tt class="kw">Discovery Mode</tt> check-box is checked, input fields for several parameters, which are incompatible with this mode, will be removed from the input page. These fields will reappear when the check-box is unchecked.</p>
+
+<a href="#toc"><b><tt>[Table of Contents]</tt></b></a>
+
+
+
+<a name="results"><h3>Output Page</h3></a>
+<p>The output page consists of several sections, as follows.</p>
+
+<h4>Loci Distribution</h4>
+<img src="tut02.png">
+<p>This table displays the residue at each of the loci specified for each input sequence. In the example above, only the first 6 of 49 sequences are shown. If an output grouping was specified, the residues are separated into columns. In discovery mode, only variant residues are shown. Output grouping is not available in discovery mode.</p>
+
+<h4>Residue Distribution Summary</h4>
+<img src="tut04.png">
+<p>This table shows the distribution of residues at each locus. Values are either percentages (shown above) or raw counts.</p>
+
+<h4>Mutation Distribution Graph</h4>
+<img src="tut05.png">
+<p>If a reference motif was specified on the input page, a mutation distribution graph will be included on the output page. A detailed discussion of the mutation distribution graph is provided in the separate graph tutorial <a href="graphtut.html" target="_blank">here</a> (this link will open in a new browser window). Brielfy, the graph is a plot of the distribution of residues (as shown in the "Residue Distribution Summary" table above) after excluding the reference residue specified for each locus. The graph, therefore, shows non-reference residues at each locus and can be used to visualize the extent of variation found at each locus.</p>
+
+<p>The plot above was produced by first running the tool with the example parameters discussed previously. No reference motif was specified, so no graph was produced. The motif distribution table (see below) was examined, and the motif which occurs most frequently was noted. The tool was then run a second time, with the noted motif <tt class="data">AGTCATCGGG</tt> specified as the reference motif in the "Mutation Distriubtion Graph Parameters" section. The graph shows the distribution of residues for all sequences which do not match the reference motif specified. For example, at position <tt class="data">1812</tt>, the reference sequence is a <tt class="data">T</tt>, as shown on the X-axis label below the bar. The blue bar indicates that, apart from the reference residue, only a resiude of <tt class="data">C</tt> was found at this position, and that it occurred in approximately 22% of the sequences. At position <tt class="data">1810</tt>, apart from the reference resiude, both an <tt class="data">A</tt> and a <tt class="data">C</tt> occur, each in approximately 2% of the sequences. The raw data used to generate the plot can be downloaded as a CSV (comma-separated value) file by clicking on the link below the graph. CSV files can easily be imported into spreadsheet applications.</p>
+
+<h4>Motif Distribution</h4>
+<img src="tut06.png">
+<p>All specified loci are concatenated (joined) to produce a motif for each sequence. This motif is not a linear sequence of adjacent residues as would be found in the sequence data. Rather, it is the motif (pattern) produced by placing the residue found at each locus, for each sequence, next to each other to generate a motif. The "Motif Distribution" table shows the distribution of these motifs, sorted in descending order. For example, in the table above, the motif <tt class="data">AGTCATCGGG</tt> occurs in 44.90% of sequences. This means that in 44.90% of the sequences, a residue of <tt class="data">A</tt> was found at position <tt class="data">1762</tt>, a residue of <tt class="data">G</tt> at <tt class="data">1764</tt>, and so on. A unique label (for example, <tt class="data">L0001</tt>) is attached to each motif. These data are plotted on a graph, which is shown below the table, as follows.</p>
+<img src="tut07.png">
+<p>The label for each motif is used on the X-axis of the graph. This has been done to avoid text overlapping, which may occur if the motifs are long. The raw data used to generate the plot can be downloaded as a CSV file by clicking on the link below the graph. Parameters, which are specified under the "Mutation Distribution Graph Parameters" section on the input page, are not used when preparing this graph; these parameters are only applicable to the "Mutation Distribution Graph".</p>
+
+<p>The sequence ID associated with each motif can be viewed by clicking on "View detailed output" link below the graph. This link, which will open in a new browser window, displays a table, as shown below (not all lines of the table are shown).</p>
+<img src="tut08.png">
+<p>Data in the table above are grouped by motif. This table can be used to identify the sequence IDs for motifs of interest.</p>
+
+<a href="#toc"><b><tt>[Table of Contents]</tt></b></a>
+
+
+
+<a name="citation"><h3>Citation</h3></a>
+<p>If you have used data or output generated by the tool in your publications or presentations, please cite the following paper:</p>
+<p><tt><b>Bell, T. G. and Kramvis, A.</b> (2013) <i>Mutation Reporter Tool: an online tool to interrogate loci of interest, with its utility demonstrated using hepatitis B virus</i>.  Virology Journal <b>10:</b> 62. Available <a href="http://www.virologyj.com/content/10/1/62" target="_blank">online</a>.</tt></p>
+
+<a href="#toc"><b><tt>[Table of Contents]</tt></b></a>
+
+<br><br><hr>
+
+</div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>HVDRP Mutation Reporter Tool: Regular Expression Tutorial</title>
+<link rel="stylesheet" type="text/css" href="/res/hvdr.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<style type="text/css">
+.hidden { visibility: hidden; }
+.unhidden { visibility: visible; }
+td { text-align : left; }
+td.shade1 { background: lightblue; }
+td.shade2 { background: #ffff99;w; }
+td.shade3 { background: pink; }
+fieldset { width: 95%; }
+input.aminoacid1 { text-align:center; background:lightblue; color:darkslategrey; font-weight:bold; }
+input.aminoacid2 { text-align:center; background:#ffff99; color:darkslategrey; font-weight:bold; }
+input.nucleotide { text-align:center; }
+div.instructions { font-family:monospace; }
+ul.samplelist { font-family:monospace; color:blue; }
+.sample { font-family: monospace; color:blue; }
+.mono { font-family: monospace; font-weight: bold; }
+a:focus { outline: 0; }
+em.i { font-style:oblique; font-weight:normal; text-decoration:none; }
+em.b { font-style:normal; font-weight:bold; text-decoration:none; }
+legend { font-weight:bold; padding:0.2em 0.5em; border:1px solid green; color:green; font-size:120%; font-family:monospace; background:lightgreen; }
+</style>
+</head>
+<body>
+<h1>HVDR Online Tools</h1>
+<div class="note">Hepatitis Virus Diversity Research <a href="http://www.wits.ac.za/health/hvdrp">Programme</a> and Wits <a href="http://www.bioinf.wits.ac.za">Bioinformatics</a><br>University of the Witwatersrand</div>
+<h2><img src="/res/mrt.png" style="vertical-align:middle"> Mutation Reporter Tool</h2>
+
+<br>
+<fieldset>
+<legend>Regular Expression Tutorial</legend>
+From the <a href="http://en.wikipedia.org/wiki/Regular_expression">Wikipedia article</a> on regular expressions:<br><br>
+<i><b>A regular expression provides a concise and flexible means to "match" (specify and recognize)<br>strings of text, such as particular characters, words, or patterns of characters.</b></i>
+<br><br>
+Consider the following sequence IDs in a FASTA file:<br>
+<ul class="samplelist">
+<li>>Ken2100HCC</li>
+<li>>Ken2101HCC</li>
+<li>>Ken2215HCC</li>
+<li>>Ken2220FIB</li>
+<li>>Ken2226CHR</li>
+<li>>Ken2228CHR</li>
+</ul>
+
+The following examples illustrate how to include or exclude various samples:<br><br>
+<table cellpadding="3" border="3">
+<tr><td></td><td><b>Regular Expression</b></td><td><b>Explanation</b></td></tr>
+<tr><td>Include</td><td class="mono">HCC</td><td>Include only sequences with <span class="sample">HCC</span> in the sequence ID</td></tr>
+<tr><td>Exclude</td><td class="mono">FIB</td><td>Exclude all sequences with <span class="sample">FIB</span> in the sequence ID</td></tr>
+<tr><td>Exclude</td><td class="mono">(2215|2220)</td><td>Exclude <span class="sample">Ken2215HCC</span> and <span class="sample">Ken2220FIB</span></td></tr>
+<tr><td>Include</td><td class="mono">(HCC|2228)</td><td>Include only sequences with <span class="sample">HCC</span> or <span class="sample">2228</span> in the sequence ID</td></tr>
+<tr><td>Include</td><td class="mono">2..0</td><td>Include only <span class="sample">Ken2100HCC</span> and <span class="sample">Ken2220FIB</span></td></tr>
+</table>
+<ul>
+<li>If the "regular expression" box is blank, this is interpreted to mean "all sequences".
+<li>The default setting is to set "Include" and to leave the regular expression box blank.</li>
+<li><b>Specifying "Exclude" with a blankregular expression box will exclude all sequences.<b></li>
+</ul>
+</fieldset>
+
+</body>
+</html>
+
