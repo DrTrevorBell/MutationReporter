@@ -1,6 +1,6 @@
 # Mutation Reporter Tool
 
-The tool is described in the following open-access journal article: www.virologyj.com/content/10/1/62
+The tool is described in the following open-access journal article: http://www.virologyj.com/content/10/1/62
 
 Please cite this article if you make use of the tool or the source code.
 
