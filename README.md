@@ -1,4 +1,4 @@
-# MutationReporter
+# Mutation Reporter Tool
 
 The tool is described in the following open-access journal article: www.virologyj.com/content/10/1/62
 
